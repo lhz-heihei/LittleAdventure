@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class player_move : MonoBehaviour
 {
     // Start is called before the first frame update
     public CharacterController cc;
+    public Animator _animator;
     private float horizontal, vertical;
     public float move_speed;
     private Vector3 dir;
@@ -14,6 +16,7 @@ public class player_move : MonoBehaviour
     private void Awake()
     {
         cc = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
     }
     void Start()
     {
@@ -46,9 +49,13 @@ public class player_move : MonoBehaviour
         {
             velocity_vertical = gravity * 0.3f;
         }
-        dir *= move_speed * Time.deltaTime;
+        _animator.SetFloat("Speed", dir.magnitude);
+        _animator.SetBool("IsAir", !cc.isGrounded);
+        dir *= move_speed;
         dir += Vector3.up * velocity_vertical;
        
-        cc.Move(dir);
+        cc.Move(dir*Time.deltaTime);
     }
+
+    
 }
