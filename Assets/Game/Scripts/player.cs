@@ -38,7 +38,7 @@ public class player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            Attack();
+            SwitchToNewState(CharacterState.Attacking);
         }
         
         switch (currentState)
@@ -79,10 +79,7 @@ public class player : MonoBehaviour
         cc.Move(dir*Time.deltaTime);
     }
 
-    void Attack()
-    {
-        SwitchToNewState(CharacterState.Attacking);
-    }
+    
 
     void Slide()
     {

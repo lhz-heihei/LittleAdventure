@@ -33,7 +33,7 @@ public class enemy : MonoBehaviour
                 EnemyMovement();
                 break;
             case CharacterState.Attacking:
-                Debug.Log("hello");
+                
                 break;
         }
         
@@ -69,8 +69,15 @@ public class enemy : MonoBehaviour
             case CharacterState.Normal:
                 break;
             case CharacterState.Attacking:
+                animator.SetTrigger("Attack");
+                transform.rotation = Quaternion.LookRotation(targetPlayer-transform.position);
                 break;
         }
         currentState = newState;
+    }
+
+    void AttackAnimationEnd()
+    {
+        SwitchToNewState(CharacterState.Normal);
     }
 }
