@@ -9,6 +9,6 @@ public class EnemyVFXmanager : MonoBehaviour
     void BurstFootStep()
     {
         footStep.Play();
-        Debug.Log("baga");
+        
     }
 }
