@@ -16,6 +16,7 @@ public class player : MonoBehaviour
     public float slide_speed;
     public float slide_duration;
     private float slide_startTime;
+    private ApplyDamage _applyDamage;
     public enum CharacterState
     {
         Normal,
@@ -26,6 +27,7 @@ public class player : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        _applyDamage = GetComponentInChildren<ApplyDamage>();
     }
     void Start()
     {
@@ -114,5 +116,17 @@ public class player : MonoBehaviour
     void AttackAnimationEnd()
     {
         SwitchToNewState(CharacterState.Normal);
+    }
+
+    void damageTriggerEnabled()
+    {
+        _applyDamage._collider.enabled = true;
+        _applyDamage.damageTargets.Clear();
+    }
+
+    void damageTriggerDisabled()
+    {
+        _applyDamage._collider.enabled = false;
+        _applyDamage.damageTargets.Clear();
     }
 }
