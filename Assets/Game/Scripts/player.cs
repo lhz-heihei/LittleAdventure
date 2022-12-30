@@ -99,6 +99,7 @@ public class player : MonoBehaviour
             case CharacterState.Normal:
                 break;
             case CharacterState.Attacking:
+                damageTriggerDisabled();
                 break;
         }
         switch (newState)

@@ -29,9 +29,10 @@ public class ApplyDamage : MonoBehaviour
             PlayerVFXmanager playerVFXmanager = transform.parent.GetComponent<PlayerVFXmanager>();
             if(playerVFXmanager!=null)
             {
-                playerVFXmanager.PlaySlash(other.transform.position);
-                
+                playerVFXmanager.PlaySlash(other.transform.position);             
             }
+            EnemyVFXmanager enemyVFXmanager = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyVFXmanager>();
+            enemyVFXmanager.PlayBeingHit(transform.position);
         }
     }
 
