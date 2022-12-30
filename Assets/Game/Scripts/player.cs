@@ -21,6 +21,7 @@ public class player : MonoBehaviour
     {
         Normal,
         Attacking,
+        Dead,
     }
     public CharacterState currentState;
     private void Awake()
@@ -51,6 +52,8 @@ public class player : MonoBehaviour
             case CharacterState.Attacking:
                 Slide();
                 break;
+            case CharacterState.Dead:
+                return;
         }
     }
 
@@ -101,14 +104,19 @@ public class player : MonoBehaviour
             case CharacterState.Attacking:
                 damageTriggerDisabled();
                 break;
+            case CharacterState.Dead:
+                return;
         }
         switch (newState)
         {
             case CharacterState.Normal:
                 break;
             case CharacterState.Attacking:
-                animator.SetTrigger("Attack");
-                
+                animator.SetTrigger("Attack");      
+                break;
+            case CharacterState.Dead:
+                cc.enabled = false;
+                animator.SetTrigger("Dead");
                 break;
         }
         currentState = newState;

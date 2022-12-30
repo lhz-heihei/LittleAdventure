@@ -14,6 +14,7 @@ public class enemy : MonoBehaviour
     {
         Normal,
         Attacking,
+        Dead,
     }
     public CharacterState currentState;
     // Start is called before the first frame update
@@ -35,6 +36,8 @@ public class enemy : MonoBehaviour
             case CharacterState.Attacking:
                 
                 break;
+            case CharacterState.Dead:
+                return;
         }
         
     }
@@ -63,6 +66,8 @@ public class enemy : MonoBehaviour
                 break;
             case CharacterState.Attacking:
                 break;
+            case CharacterState.Dead:
+                return;
         }
         switch (newState)
         {
@@ -71,6 +76,10 @@ public class enemy : MonoBehaviour
             case CharacterState.Attacking:
                 animator.SetTrigger("Attack");
                 transform.rotation = Quaternion.LookRotation(targetPlayer-transform.position);
+                break;
+            case CharacterState.Dead:
+                
+                animator.SetTrigger("Dead");
                 break;
         }
         currentState = newState;
