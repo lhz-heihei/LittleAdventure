@@ -8,6 +8,7 @@ public class EnemyVFXmanager : MonoBehaviour
     public VisualEffect footStep;
     public VisualEffect Smash;
     public ParticleSystem BeingHit;
+    public VisualEffect Splash;
     void BurstFootStep()
     {
         footStep.Play();
@@ -26,5 +27,11 @@ public class EnemyVFXmanager : MonoBehaviour
      
         BeingHit.transform.rotation = Quaternion.LookRotation(dir);
         BeingHit.Play();
+
+        Vector3 SplashPos = transform.position;
+        SplashPos.y += 2f;
+        VisualEffect newSplash = Instantiate(Splash, SplashPos, Quaternion.identity);
+        newSplash.Play();
+        Destroy(newSplash, 10f);
     }
 }
